@@ -1,0 +1,25 @@
+string encode(string src)
+{     
+  //Your code here 
+  int n=src.length();
+  char ch=src[0];
+  string res="";
+  int count=1;
+  for(int i=1;i<n;i++)
+  {
+      if(src[i]==ch)
+      {
+          count++;
+      }
+      else
+      {
+          res+=ch;
+          res+=(count+'0');
+          ch=src[i];
+          count=1;
+      }
+  }
+  res+=ch;
+  res+=(count+'0');
+  return res;
+}     
