@@ -1,0 +1,32 @@
+class Solution
+{
+    public:
+    //Function to count number of ways to reach the nth stair 
+    //when order does not matter.
+    long long countWays(int m)
+    {
+        // your code here
+        int dp[m+1];
+        if(m==0) return 0;
+        else if(m==1) return 1;
+        else if(m==2) return 2;
+        else
+        {
+           dp[0]=0;
+           dp[1]=1;
+           dp[2]=2;
+           for(int i=3;i<=m;i++)
+           {
+               if(i%2!=0)
+               {
+                  dp[i]=dp[i-1];
+               }
+               else
+               {
+                  dp[i]=dp[i-2]+1;
+               }
+           }
+        }
+        return dp[m];
+    }
+};
