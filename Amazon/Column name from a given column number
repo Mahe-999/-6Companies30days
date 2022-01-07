@@ -1,0 +1,25 @@
+class Solution{
+    public:
+    string colName (long long int n)
+    {
+        // your code here
+        string alpha="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        string res="";
+        while(n>0)
+        {
+            int k=n%26;
+            if(k!=0)
+            {
+                res+=(alpha[k-1]);
+            }
+            else if(k==0)
+            {
+                res+='Z';
+                n-=26;
+            }
+            n=n/26;
+        }
+        reverse(res.begin(),res.end());
+        return res;
+    }
+};
