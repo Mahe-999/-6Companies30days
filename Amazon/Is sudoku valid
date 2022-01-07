@@ -1,0 +1,45 @@
+class Solution{
+public:
+    int isValid(vector<vector<int>> mat)
+    {
+        // code here
+        int n=mat.size();
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(mat[i][j]!=0)
+                {
+                    int e=mat[i][j];
+                    for(int p=0;p<n;p++)
+                    {
+                        if(p!=j && mat[i][p]==e)
+                        {
+                            return 0;
+                        }
+                    }
+                    for(int p=0;p<n;p++)
+                    {
+                        if(p!=i && mat[p][j]==e)
+                        {
+                            return 0;
+                        }
+                    }
+                    int p=i-i%3;
+                    int o=j-j%3;
+                    for(int k=0;k<3;k++)
+                    {
+                        for(int l=0;l<3;l++)
+                        {
+                           if((k+p)!=i && (l+o)!=j && mat[k+p][l+o]==e)
+                           {
+                               return 0;
+                           }
+                        }
+                    }
+                }
+            }
+        }
+        return 1;
+    }
+};
