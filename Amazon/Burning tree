@@ -1,0 +1,47 @@
+class Solution {
+  public:
+unordered_map<Node*,Node*>mp;
+Node* x;
+void helper(Node* root,int tar,Node* par)
+{
+    if(!root) return ;
+    if(tar==root->data)
+    x=root;
+    mp[root]=par;
+    helper(root->left,tar,root);
+    helper(root->right,tar,root);
+}
+
+int minTime(Node* root, int tar) 
+{
+    helper(root,tar,NULL);
+    unordered_map<Node*,int>vis;
+    vis[x]=1;
+    queue<pair<Node*,int>>q;
+    q.push({x,0});
+    int ans=0;
+    while(!q.empty())
+    {
+        auto p= q.front().first;
+        auto level=q.front().second;
+        q.pop();
+        ans=max(ans,level);
+        if(p->left && !vis[p->left])
+        {
+            vis[p->left]=1;
+            q.push({p->left,level+1});
+        }
+        if(p->right && !vis[p->right])
+        {
+            vis[p->right]=1;
+            q.push({p->right,level+1});
+        }
+        if(mp[p] && !vis[mp[p]])
+        {
+            vis[mp[p]]=1;
+            q.push({mp[p],level+1});
+        }
+    }
+    return ans;
+    }
+};
