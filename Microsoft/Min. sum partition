@@ -1,11 +1,4 @@
-int finddiff(int arr[],int rsum,int sum,int n)
-    {
-        if(n==0)
-        {
-            return abs((sum-rsum)-rsum);
-        }
-        return min(finddiff(arr,rsum+arr[n],sum,n-1),finddiff(arr,rsum,sum,n-1));
-    }
+
 	int minDifference(int arr[], int n)  
 	{ 
 	    // Your code goes here
