@@ -1,0 +1,45 @@
+class Solution {
+public:
+    bool isCycle(vector<int>adj[],int src,vector<bool>&stack,vector<bool>&visited)
+    {
+        if(visited[src]==false)
+        {
+           visited[src]=true;
+           stack[src]=true;
+           for(auto it:adj[src])
+           {
+              if(!visited[it] && isCycle(adj,it,stack,visited))
+              {
+                 return true;
+              }
+              else if(stack[it])
+              {
+                 return true;
+              }
+            }
+        }
+        stack[src]=false;
+        return false;
+    }
+	bool isPossible(int n, vector<pair<int, int> >& pre)
+	{
+	    // Code here
+	    int p=pre.size();
+	    vector<int>adj[n];
+	    for(int i=0;i<p;i++)
+	    {
+	        adj[pre[i].second].push_back(pre[i].first);
+	    }
+	    vector<bool>visited(n,false);
+	    vector<bool>stack(n,false);
+	    for(int i=0;i<n;i++)
+	    {
+	       if(isCycle(adj,i,stack,visited))
+	       {
+	          return false;
+	       }
+	    }
+	    return true;
+	}
+};
+
