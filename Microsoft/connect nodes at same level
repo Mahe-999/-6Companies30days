@@ -1,0 +1,44 @@
+void connect(Node *root)
+    {
+       // Your Code Here
+       if(root==NULL)
+       {
+           return;
+       }
+       root->nextRight=NULL;
+       queue<Node*>q;
+       q.push(root);
+       while(!q.empty())
+       {
+           int size=q.size();
+           Node* next=NULL;
+           for(int i=0;i<size;i++)
+           {
+               Node* tmp=q.front();
+               q.pop();
+               if(tmp->left)
+               {
+                   q.push(tmp->left);
+                   if(next!=NULL)
+                   {
+                       next->nextRight=tmp->left;
+                   }
+                   next=tmp->left;
+               }
+               if(tmp->right)
+               {
+                   q.push(tmp->right);
+                   if(next!=NULL)
+                   {
+                     next->nextRight=tmp->right;
+                   }
+                   next=tmp->right;
+               }
+           }
+           if(next!=NULL)
+           {
+               next->nextRight=NULL;
+           }
+       }
+       
+    }    
