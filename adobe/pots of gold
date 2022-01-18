@@ -1,0 +1,21 @@
+ int dp[501][501];
+    int find(vector<int>&v,int i,int j)
+    {
+        if(i>j)
+        {
+            return dp[i][j]=0;
+        }
+        if(dp[i][j]!=-1)
+        {
+            return dp[i][j];
+        }
+        int l=v[i]+min(find(v,i+2,j),find(v,i+1,j-1));
+        int r=v[j]+min(find(v,i+1,j-1),find(v,i,j-2));
+        return dp[i][j]=max(l,r);
+    }
+    int maxCoins(vector<int>&v,int n)
+    {
+	    //Write your code here
+	    memset(dp,-1,sizeof(dp));
+	    return find(v,0,n-1);
+    }
