@@ -1,0 +1,37 @@
+vector<string> winner(string arr[],int n)
+    {
+        unordered_map<string,int>mp;
+        for(int i=0;i<n;i++)
+        {
+            mp[arr[i]]++;
+        }
+        int max_votes=0;
+        string name="";
+        for(auto it:mp)
+        {
+            if(it.second>max_votes)
+            {
+                max_votes=it.second;
+                name=it.first;
+            }
+            else if(it.second==max_votes)
+            {
+                if(it.first<name)
+                {
+                    name=it.first;
+                    max_votes=it.second;
+                }
+            }
+        }
+        string vote="";
+        while(max_votes>0)
+        {
+            vote+=(max_votes%10 + '0');
+            max_votes/=10;
+        }
+        reverse(vote.begin(),vote.end());
+        vector<string>v;
+        v.push_back(name);
+        v.push_back(vote);
+        return v;
+    }
