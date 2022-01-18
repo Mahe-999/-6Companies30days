@@ -1,0 +1,21 @@
+ string amendSentence (string s)
+    {
+        // your code here
+        int n=s.length();
+        string str="";
+        if(isupper(s[0])) str+=s[0]+32;
+        else str+=s[0];
+        for(int i=1;i<n;i++)
+        {
+           if(isupper(s[i]))
+           {
+               str+=" ";
+               str+=(s[i]+32);
+           }
+           else
+           {
+               str+=s[i];
+           }
+        }
+        return str;
+    }
