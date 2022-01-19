@@ -1,0 +1,34 @@
+int atoi(string str)
+    {
+        //Your code here
+        int n=str.length();
+        int sign=1;
+        bool numberStarted=false;
+        int number=0;
+        for(int i=0;i<n;i++)
+        {
+            if(str[i]==' ' && !numberStarted)
+            {
+                continue;
+            }
+            else if(str[i]=='-' && !numberStarted)
+            {
+                sign=-1;
+                numberStarted=true;
+            }
+            else if(str[i]=='+' && !numberStarted)
+            {
+                numberStarted=true;
+            }
+            else if(str[i]>='0' && str[i]<='9')
+            {
+                number=number*10+(str[i]-'0');
+                numberStarted=true;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        return sign*number;
+    }
