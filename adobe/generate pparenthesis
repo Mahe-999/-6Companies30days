@@ -1,0 +1,28 @@
+void findParenthesis(int open,int close,vector<string>&v,int n,string s)
+    {
+        if(open==n && close==n)
+        {
+            v.push_back(s);
+            return;
+        }
+        if(open<n)
+        {
+            s+='(';
+            findParenthesis(open+1,close,v,n,s);
+            s.pop_back();
+        }
+        if(close<open)
+        {
+            s+=')';
+            findParenthesis(open,close+1,v,n,s);
+            s.pop_back();
+        }
+    }
+    vector<string> AllParenthesis(int n) 
+    {
+        // Your code goes here 
+        int open=0,close=0;
+        vector<string>v;
+        findParenthesis(open,close,v,n,"");
+        return v;
+    }
