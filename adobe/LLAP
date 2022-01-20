@@ -1,0 +1,32 @@
+int lengthOfLongestAP(int arr[], int n)
+    {
+        // code here
+        if(n==1) return 1;
+        set<int>st;
+        int dp[n];
+        dp[0]=0;
+        st.insert(dp[0]);
+        for(int i=1;i<n;i++)
+        {
+            dp[i]=dp[i-1]+(arr[i]-arr[i-1]);
+            st.insert(dp[i]);
+        }
+        int seq=2;
+        int max_seq=0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                seq=2;
+               int diff=dp[j]-dp[i];
+               int k=dp[j]+diff;
+               while(st.find(k)!=st.end())
+               {
+                  seq++;
+                  k+=diff;
+               }
+                max_seq=max(max_seq,seq);
+            }
+        }
+        return max_seq;
+    }
