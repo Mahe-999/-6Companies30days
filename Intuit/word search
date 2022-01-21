@@ -1,0 +1,31 @@
+bool find(int i,int j,int n,int m,int k,int l,vector<vector<char>>&board,string word)
+    {
+        if(k==l) return true;
+        if(i<0 || i>=n || j<0 || j>=m || board[i][j]!=word[k]) return false;
+        board[i][j]='0';
+        bool flag=(find(i+1,j,n,m,k+1,l,board,word) || find(i,j+1,n,m,k+1,l,board,word) || find(i-1,j,n,m,k+1,l,board,word) || find(i,j-1,n,m,k+1,l,board,word));
+        board[i][j]=word[k];
+        return flag;
+    }
+    bool isWordExist(vector<vector<char>>& board, string word) 
+    {
+        // Code here
+        if(word=="") return false;
+        int n=board.size();
+        int m=board[0].size();
+        int l=word.length();
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(board[i][j]==word[0])
+                {
+                    if(find(i,j,n,m,0,l,board,word))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
