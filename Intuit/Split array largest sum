@@ -1,0 +1,53 @@
+bool check(int mid,vector<int>&nums,int m,int n)
+    {
+        int split=1;
+        int tmp=mid;
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]<=tmp)
+            {
+                tmp-=nums[i];
+            }
+            else
+            {
+                split++;
+                tmp=mid;
+                if(nums[i]<=tmp)
+                {
+                    tmp-=nums[i];
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        return (split<=m)?1:0;
+    }
+    int splitArray(vector<int>& nums, int m)
+    {
+        int n=nums.size();
+        int sum=0;
+        for(int i=0;i<n;i++)
+        {
+            sum+=nums[i];
+        }
+        int e=sum;
+        int s=1;
+        int res=INT_MAX;
+        while(s<=e)
+        {
+            int mid=s+(e-s)/2;
+            bool flag=check(mid,nums,m,n);
+            if(flag)
+            {
+                res=min(res,mid);
+                e=mid-1;
+            }
+            else
+            {
+                s=mid+1;
+            }
+        }
+        return res==INT_MAX?0:res;
+    }
