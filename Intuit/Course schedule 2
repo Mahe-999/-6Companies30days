@@ -1,0 +1,50 @@
+void dfs(int src,vector<int>adj[],int n,vector<bool>&vis,vector<bool>&cyc,stack<int>&st,bool &isCycle)
+    {
+        if(isCycle) return;
+        vis[src]=true;
+        cyc[src]=true;
+        for(auto it:adj[src])
+        {
+            if(!vis[it])
+            {
+                dfs(it,adj,n,vis,cyc,st,isCycle);
+            }
+            else if(cyc[it])
+            {
+                isCycle=true;
+            }
+        }
+        st.push(src);
+        cyc[src]=false;
+    }
+    vector<int> findOrder(int n, vector<vector<int>>& pre) 
+    {
+        vector<int>v;
+        vector<int>adj[n];
+        for(int i=0;i<pre.size();i++)
+        {
+            adj[pre[i][1]].push_back(pre[i][0]);
+        }
+        stack<int>st;
+        vector<bool>cyc(n,false);
+        vector<bool>vis(n,false);
+        bool isCycle=false;
+        for(int i=0;i<n;i++)
+        {
+            if(vis[i]==false)
+            {
+                dfs(i,adj,n,vis,cyc,st,isCycle);
+            }
+        }
+        if(isCycle) return {};
+        else
+        {
+           while(!st.empty())
+           {
+              v.push_back(st.top());
+              st.pop();
+           }
+           return v;
+        }
+        //reverse(v.begin(),v.end());
+    }
