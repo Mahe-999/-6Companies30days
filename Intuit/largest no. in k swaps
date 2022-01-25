@@ -1,0 +1,40 @@
+void largest(string str,int k,int index,int n,string &max)
+    {
+        if(k==0)
+        {
+            return;
+        }
+        char maxm=str[index];
+        for(int i=index+1;i<n;i++)
+        {
+            if(maxm<str[i])
+            {
+                maxm=str[i];
+            }
+        }
+        if(str[index]!=maxm)
+        {
+            k--;
+        }
+        for(int i=index;i<n;i++)
+        {
+            if(maxm==str[i])
+            {
+                swap(str[index],str[i]);
+                if(str.compare(max)>0)
+                {
+                    max=str;
+                }
+                largest(str,k,index+1,n,max);
+                swap(str[i],str[index]);
+            }
+        }
+    }
+    string findMaximumNum(string str, int k)
+    {
+       // code here.
+       int n=str.length();
+       string max=str;
+       largest(str,k,0,n,max);
+       return max;
+    }
